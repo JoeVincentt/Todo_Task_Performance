@@ -7,7 +7,7 @@ export const getTasks = async () => {
     tasks = JSON.parse(tasks);
     return tasks;
   } else {
-    return null;
+    return [];
   }
 };
 export const getDoneAmount = async () => {
@@ -24,15 +24,6 @@ export const getNotDoneAmount = async () => {
   if (notDoneAmount !== null) {
     notDoneAmount = Number(JSON.parse(notDoneAmount));
     return notDoneAmount;
-  } else {
-    return null;
-  }
-};
-export const getTotalAmount = async () => {
-  let totalAmount = await SecureStore.getItemAsync("PerformanceTotalAmount");
-  if (totalAmount !== null) {
-    totalAmount = Number(JSON.parse(totalAmount));
-    return totalAmount;
   } else {
     return null;
   }
