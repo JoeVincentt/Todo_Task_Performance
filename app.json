@@ -25,7 +25,8 @@
       "bundleIdentifier": "com.jvmastery.todotasktracker"
     },
     "android": {
-      "package": "com.jvmastery.todotasktracker"
+      "package": "com.jvmastery.todotasktracker",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.jvmastery.todotasktracker"
     }
   }
 }

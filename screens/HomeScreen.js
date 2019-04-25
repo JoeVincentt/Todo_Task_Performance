@@ -9,12 +9,7 @@ import {
   Alert
 } from "react-native";
 import { Icon } from "native-base";
-import {
-  ItalicText,
-  LightText,
-  RegularText,
-  BoldItalicText
-} from "../components/StyledText";
+import { ItalicText, BoldItalicText } from "../components/StyledText";
 import { height, width } from "../constants/Layout";
 import {
   getDoneAmount,
@@ -82,6 +77,7 @@ export default class HomeScreen extends React.Component {
     });
     await setTasks(this.state.tasks);
   };
+
   resetProgress = async () => {
     await this.setState({
       doneAmount: 0,
@@ -95,6 +91,7 @@ export default class HomeScreen extends React.Component {
     const { tasks, doneAmount, notDoneAmount } = this.state;
     return (
       <>
+        {/* add task field and button starts */}
         <View
           style={{
             marginTop: height * 0.075,
@@ -102,16 +99,7 @@ export default class HomeScreen extends React.Component {
           }}
         >
           <TextInput
-            style={{
-              backgroundColor: "white",
-              borderColor: "#90caf9",
-              borderTopWidth: 1,
-              borderBottomWidth: 1,
-              fontSize: height * 0.04,
-              height: height * 0.15,
-              padding: width * 0.025,
-              fontFamily: "Roboto-Light"
-            }}
+            style={styles.textInput}
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
             editable={true}
@@ -120,19 +108,7 @@ export default class HomeScreen extends React.Component {
           />
           <View style={{ alignItems: "center", justifyContent: "center" }}>
             <TouchableOpacity onPress={() => this.addTask()}>
-              <View
-                style={{
-                  margin: width * 0.015,
-                  backgroundColor: "#e1f5fe",
-                  width: width * 0.3,
-                  height: height * 0.075,
-                  borderRadius: 15,
-                  borderWidth: 3,
-                  borderColor: "#90caf9",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
+              <View style={styles.addButton}>
                 <BoldItalicText style={{ fontSize: height * 0.03 }}>
                   {" "}
                   ADD{" "}
@@ -141,64 +117,29 @@ export default class HomeScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-        <View
-          style={{
-            paddingTop: height * 0.015,
-            flexDirection: "row",
-            justifyContent: "space-evenly"
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Icon
-              name="done-all"
-              style={{
-                color: "#76ff03",
-                fontSize: height * 0.07,
-                marginRight: width * 0.02
-              }}
-            />
+        <View style={styles.progressBox}>
+          <View style={styles.rowBox}>
+            <Icon name="done-all" style={styles.doneIcon} />
             <BoldItalicText style={{ fontSize: height * 0.03 }}>
               {doneAmount !== null ? doneAmount : 0}
             </BoldItalicText>
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
-            <Icon
-              name="close"
-              style={{
-                color: "#ff5252",
-                fontSize: height * 0.07,
-                marginRight: width * 0.02
-              }}
-            />
+          <View style={styles.rowBox}>
+            <Icon name="close" style={styles.failIcon} />
             <BoldItalicText style={{ fontSize: height * 0.03 }}>
               {notDoneAmount !== null ? notDoneAmount : 0}
             </BoldItalicText>
           </View>
         </View>
+        {/* add task field and bbutton ends */}
+        {/* ******************************* */}
+        {/* Tasks render here */}
         <ScrollView
           style={{ paddingTop: height * 0.02, maxHeight: height * 0.5 }}
         >
           {tasks.length === 0 ? (
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
+            <View style={styles.emptyTaskBox}>
               <BoldItalicText>No Tasks Yet! Please Add a Task.</BoldItalicText>
             </View>
           ) : (
@@ -217,67 +158,95 @@ export default class HomeScreen extends React.Component {
             />
           )}
         </ScrollView>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderTopWidth: 0.5,
-            borderTopColor: "black"
-          }}
-        >
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
+        {/* end of task render */}
+        {/* ******************************* */}
+        {/* footer starts */}
+        <View style={styles.footer}>
+          <View style={styles.rowBox}>
             <TouchableOpacity onPress={() => this.clearAll()}>
-              <Icon
-                name="refresh"
-                style={{
-                  color: "#d50000",
-                  fontSize: height * 0.04,
-                  marginRight: width * 0.02,
-                  marginLeft: width * 0.05,
-                  marginTop: height * 0.01
-                }}
-              />
+              <Icon name="refresh" style={styles.clearAll} />
             </TouchableOpacity>
             <ItalicText>Clear all</ItalicText>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center"
-            }}
-          >
+          <View style={styles.rowBox}>
             <ItalicText>Reset Progress</ItalicText>
             <TouchableOpacity onPress={() => this.resetProgress()}>
-              <Icon
-                name="warning"
-                style={{
-                  color: "#ffeb3b",
-                  fontSize: height * 0.04,
-                  marginRight: width * 0.05,
-                  marginLeft: width * 0.02,
-                  marginTop: height * 0.01
-                }}
-              />
+              <Icon name="warning" style={styles.resetProgress} />
             </TouchableOpacity>
           </View>
         </View>
+        {/* end of footer */}
       </>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 50,
+  textInput: {
+    backgroundColor: "white",
+    borderColor: "#90caf9",
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    fontSize: height * 0.04,
+    height: height * 0.15,
+    padding: width * 0.025,
+    fontFamily: "Roboto-Light"
+  },
+  addButton: {
+    margin: width * 0.015,
+    backgroundColor: "#e1f5fe",
+    width: width * 0.3,
+    height: height * 0.075,
+    borderRadius: 15,
+    borderWidth: 3,
+    borderColor: "#90caf9",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  progressBox: {
+    paddingTop: height * 0.015,
+    flexDirection: "row",
+    justifyContent: "space-evenly"
+  },
+  rowBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  doneIcon: {
+    color: "#76ff03",
+    fontSize: height * 0.07,
+    marginRight: width * 0.02
+  },
+  failIcon: {
+    color: "#ff5252",
+    fontSize: height * 0.07,
+    marginRight: width * 0.02
+  },
+  emptyTaskBox: {
     flex: 1,
-    backgroundColor: "#fff"
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  footer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderTopWidth: 0.5,
+    borderTopColor: "black"
+  },
+  clearAll: {
+    color: "#d50000",
+    fontSize: height * 0.04,
+    marginRight: width * 0.02,
+    marginLeft: width * 0.05,
+    marginTop: height * 0.01
+  },
+  resetProgress: {
+    color: "#ffeb3b",
+    fontSize: height * 0.04,
+    marginRight: width * 0.05,
+    marginLeft: width * 0.02,
+    marginTop: height * 0.01
   }
 });
