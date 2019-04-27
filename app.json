@@ -5,7 +5,10 @@
     "description": "To Do, with progress count. Saves your Done and Fail task count. Keep yourself motivated by seeing how many tasks you got done and how many fail.",
     "privacy": "public",
     "sdkVersion": "32.0.0",
-    "platforms": ["ios", "android"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,10 +22,13 @@
       "fallbackToCacheTimeout": 10000,
       "checkAutomatically": "ON_LOAD"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.jvmastery.todotasktracker"
+      "bundleIdentifier": "com.jvmastery.todotasktracker",
+      "appStoreUrl": "https://itunes.apple.com/us/app/to-do-task-performance/id1460973772"
     },
     "android": {
       "package": "com.jvmastery.todotasktracker",

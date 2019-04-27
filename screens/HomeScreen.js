@@ -6,7 +6,8 @@ import {
   View,
   TextInput,
   FlatList,
-  Alert
+  Alert,
+  Keyboard
 } from "react-native";
 import { Icon } from "native-base";
 import { ItalicText, BoldItalicText } from "../components/StyledText";
@@ -66,6 +67,7 @@ export default class HomeScreen extends React.Component {
         totalAmount: this.state.totalAmount + 1
       });
       await setTasks(this.state.tasks);
+      Keyboard.dismiss();
     } else {
       Alert.alert("Can't Be Empty!");
     }
